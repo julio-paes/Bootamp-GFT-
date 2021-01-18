@@ -1,39 +1,63 @@
 ﻿using System;
-//using System.Text;
 
-class MainClass
+class Program
 {
-    public static void Main(string[] args)
+
+    static void Main(string[] args)
     {
-        String c1; //declare as suas variaveis
-        String c2 ;
-        String c3;
+        int numeroDeFigurinhas = Int32.Parse(Console.ReadLine());
+        int numeroDeFigurinhasCompradas = Int32.Parse(Console.ReadLine());
+        int totalDeFigurinhas = 0;
 
-        c1 = Console.ReadLine(); //insira suas variaveis
-        c2 = Console.ReadLine();
-        c3 = Console.ReadLine();
+        int[] albumDeFigurinha = new int[numeroDeFigurinhas];
+        int[] figurinhas = new int[numeroDeFigurinhasCompradas];
 
-        if ((c1 == "vertebrado") && (c2 == "mamifero") && (c3 == "onivoro"))
+        if (numeroDeFigurinhasCompradas > 0)
         {
+            for (int i = 0; i < numeroDeFigurinhasCompradas; i++)
+            {
+                string figurinha = Console.ReadLine();
 
-            Console.WriteLine("homem\n");
-            //complete o desafio
+                if (!string.IsNullOrEmpty(figurinha))
+                {
+                    figurinhas[i] = int.Parse(figurinha);
+                }
+            }
+
+            int figurinhaIguais = 0;
+            int repeticao = 0;
+            int index = 0;
+
+            for (int i = 0; i < numeroDeFigurinhasCompradas; i++)
+            {
+                if (repeticao > 1)
+                {
+                    figurinhaIguais++;
+                }
+
+                if (repeticao <= 1)
+                {
+                    albumDeFigurinha[index] = figurinhas[i];
+                    index++;
+                    totalDeFigurinhas++;
+                }
+                repeticao = 0;
+                for (int j = i; j < numeroDeFigurinhasCompradas; j++)
+                {
+                    if (figurinhas[i] != 0)
+                    {
+                        if (figurinhas[i] == figurinhas[j])
+                        {
+                            repeticao++;
+                        }
+                    }
+                }
+            }
         }
 
-
-        if ((c1 == "vertebrado") && (c2 == "ave") && (c3 == "carnivoro"))
-        {
-
-            Console.WriteLine("aguia\n");
-            //complete o desafio
-        }
-
-
-        if ((c1 == "invertebrado") && (c2 == "anelideo") && (c3 == "onivoro"))
-        {
-            Console.WriteLine("minhoca\n");
-        }
-
+        int numeroDeFigurinhasQueFalta = numeroDeFigurinhas - totalDeFigurinhas;
+        Console.WriteLine(numeroDeFigurinhasQueFalta);
 
     }
+
 }
